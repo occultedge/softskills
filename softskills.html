@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Skills Training for Nurses</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eef2f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
+
+        /* Video Container */
+        .video-container {
+            background-color: #fff;
+            padding: 0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 0;
+            width: 100%; 
+            max-width: 1200px;
+            margin: 20px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            height: 70vh; /* Adjusted height for more vertical space */
+        }
+
+        /* Set the dimensions for the player */
+        #player {
+            width: 100%; 
+            height: 100%;
+        }
+
+        /* Chatbox Styling */
+        #chatbox {
+            width: 90%;
+            max-width: 1200px;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        #messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            margin: 10px 0;
+        }
+
+        .user {
+            text-align: right;
+            color: blue;
+        }
+
+        .bot {
+            text-align: left;
+            color: green;
+        }
+
+        /* Chat input styling */
+        #inputArea {
+            display: flex;
+            margin-top: 10px;
+            flex-shrink: 0;
+        }
+
+        #inputArea input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+
+        #inputArea button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            flex-shrink: 0;
+        }
+
+        #inputArea button:hover {
+            background-color: #218838;
+        }
+
+        /* Responsive for smaller screens */
+        @media only screen and (max-width: 768px) {
+            .video-container {
+                height: 50vh;
+            }
+
+            #chatbox {
+                margin: 20px 0;
+            }
+        }
+
+        /* Course Content Styling */
+        .course-content {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px 0;
+            box-sizing: border-box;
+        }
+
+        .course-content h1, .course-content h2, .course-content h3 {
+            color: #2e8b57;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="video-container">
+        <iframe id="player" src="https://www.youtube.com/embed/Dz4ObFolCYk?autoplay=0&controls=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+    <!-- Chatbot Section -->
+    <div id="chatbox">
+        <h2>Student Assistant</h2>
+        <div id="messages">
+            <div class="message bot">
+                Hi, I am your virtual assistant. Ask me any questions you have about the Soft Skills course.
+            </div>
+        </div>
+        <div id="inputArea">
+            <input type="text" id="userInput" placeholder="Type your message here..." />
+            <button onclick="sendMessage()">Go</button>
+        </div>
+    </div>
+
+    <!-- Course Content Section -->
+    <div class="course-content">
+        <h1>🩺 Soft Skills Training for Nurses</h1>
+        <p>
+            Welcome to the Soft Skills training course for nurses. In this course, you will develop crucial communication, teamwork, and interpersonal skills that are essential for effective patient care and collaboration within healthcare teams.
+        </p>
+        <h2>Course Outline</h2>
+        <h3>Day 1: Effective Communication</h3>
+        <p>Learn how to communicate effectively with patients and colleagues.</p>
+
+        <h3>Day 2: Empathy in Patient Care</h3>
+        <p>Understand the importance of empathy and how to show compassion towards patients.</p>
+
+        <h3>Day 3: Teamwork and Collaboration</h3>
+        <p>Develop skills to work efficiently with healthcare teams and improve patient outcomes.</p>
+
+        <h3>Day 4: Time Management</h3>
+        <p>Learn time management techniques to handle a busy nursing schedule effectively.</p>
+
+        <h3>Day 5: Conflict Resolution</h3>
+        <p>Gain strategies to resolve conflicts in the workplace and maintain a professional environment.</p>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value.trim();
+            if (userInput === "") return;
+
+            appendMessage(userInput, 'user');
+            document.getElementById('userInput').value = '';
+
+            // Simulate bot response
+            setTimeout(function() {
+                const botResponse = `You asked: ${userInput}. Here's a helpful tip for soft skills: Always listen actively to your patients.`;
+                appendMessage(botResponse, 'bot');
+            }, 1000);
+        }
+
+        function appendMessage(message, sender) {
+            const messagesDiv = document.getElementById('messages');
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${sender}`;
+            messageElement.textContent = message;
+            messagesDiv.appendChild(messageElement);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+    </script>
+</body>
+</html>
+
